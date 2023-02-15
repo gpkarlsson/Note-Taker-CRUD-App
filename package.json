@@ -1,20 +1,17 @@
 {
-  "name": "note-taker-crud-app",
+  "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gpkarlsson/Note-Taker-CRUD-App.git"
-  },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gpkarlsson/Note-Taker-CRUD-App/issues"
+  "dependencies": {
+    "express": "^4.16.4",
+    "fs": "^0.0.1-security"
   },
-  "homepage": "https://github.com/gpkarlsson/Note-Taker-CRUD-App#readme"
+  "keywords": [],
+  "description": ""
 }

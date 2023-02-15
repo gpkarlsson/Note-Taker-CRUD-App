@@ -5,7 +5,7 @@ const path = require('path');
 const dataBase = require('./db/db.json');
 const app = express();
 const util = require('util');
-const PORT = process.env.PORT || 8000;
+
 
 //  Handling Async Processes
 const readFileAsync = util.promisify(fs.readFile);
@@ -22,29 +22,6 @@ app.use(express.json());
 
 //static middleware
 app.use(express.static('./Develop/public'));
-
-//API Route "GET"
-app.get('/api/notes', (req, res) => {
-  readFileAsync('./Develop/db/db.json', 'utf-8').then(function(data) {
-    let notes = [].concat(JSON.parse(data))
-    res.json(notes);
-  })
-});
-
-//API Route "POST"
-
-app.post('/api/notes', (req, res) => {
-  const note = req.body;
-  readFileAsync('./db/db.json', 'utf-8').then(function(data) {
-    const notes = [].concat(JSON.parse(data));
-    note.id = notes.length + 1;
-    notes.push(note);
-    return notes;
-  }).then(function(notes) {
-    writeFileAsync('/Develop/db/db.json', JSON.stringify(notes))
-    res.json(note);
-  })
-});
 
 //API Route "DELETE"
 app.delete('/api/notes/:id', (req, res) => {
@@ -67,29 +44,6 @@ app.delete('/api/notes/:id', (req, res) => {
 app.get('/api/notes', (req, res) => {
   res.json(dataBase.slice(1));
 });
-
-// app.post('/api/notes', (req, res) =>
-
-// )
-
-//HTML Routes
-app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/notes.html'));
-});
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-app.listen(PORT, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
-});
-
 
 
 
