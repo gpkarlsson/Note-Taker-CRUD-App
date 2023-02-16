@@ -2,12 +2,16 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
-const routes = require('./routes/routes')
+
 //Initialize App
 
 const app = express()
 const PORT = process.env.PORT || 3001
 
+const apiRoutes = require("./routes/apiRoutes");
+app.use(apiRoutes);
+const htmlRoutes = require("./routes/htmlRoutes");
+app.use(htmlRoutes);
 //Set up data parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
