@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 //Require route file
-require('./routes/routes');
+require('./routes/routes')(app);
 
 //Set up app listener
 app.listen(PORT, () => {
