@@ -5,16 +5,16 @@ const uuid = require('uuid');
 //
 const db = require('../db/databaseClass');
 
+const notes = require('../db/db.json');
 
 router.get('/api/notes', async function (req, res) {
-    const notes = await db.readNotes();
-    return res.json(notes);
+    res.json(notes);
 });
 
 router.post('/api/notes', async function (req, res) {
     const currentNotes = await db.readNotes();
     let newNote = {
-        id: uuid(),
+        id: uuid.v4(),
         title: req.body.title,
         text: req.body.text,
     };

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const util = require('util');
 
-const noteData = '../db/db.json';
+const noteData = './db/db.json';
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
