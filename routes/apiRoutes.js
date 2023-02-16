@@ -8,6 +8,7 @@ const db = require('../db/databaseClass');
 const notes = require('../db/db.json');
 
 router.get('/api/notes', async function (req, res) {
+    const notes = await db.readNotes();
     res.json(notes);
 });
 
