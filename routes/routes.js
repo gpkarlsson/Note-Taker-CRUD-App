@@ -1,25 +1,18 @@
 const fs = require('fs');
 const path = require('path');
-
-module.exports = app => {
-
-  fs.readFile('db/db.json', 'utf-8', (err, data) => {
-
-    if (err) throw err;
-
-    let notes = JSON.parse(data);
+const router = require('express').Router()
 
     //API ROUTES
     //------------------------------------
 
     // Set up get route for /api/notes
-    app.get('/api/notes', (req, res) => {
+    router.get('/api/notes', (req, res) => {
       //Read db.json file, return all saved notes as JSON
       res.json(notes);
     });
 
     // Set up post route for /api/notes
-    app.post('/api/notes', (req, res) => {
+    router.post('/api/notes', (req, res) => {
 
       let noteNew = req.body;
       notes.push(noteNew);
@@ -28,13 +21,13 @@ module.exports = app => {
     });
 
     //Retrieve note with specific id
-    app.get('/api/notes/:id', (req, res) => {
+    router.get('/api/notes/:id', (req, res) => {
       // Display JSON for indices of notes array for provided id
       res.json(notes[req.params.id]);
     });
 
     //Delete note with specific id
-    app.delete('/api/notes/:id', (req, res) => {
+    router.delete('/api/notes/:id', (req, res) => {
       notes.splice(req.params.id, 1);
       updateDb();
       console.log('Deleted Note with id' + req.params.id);
@@ -44,11 +37,11 @@ module.exports = app => {
     //------------------------------------
 
     // Display notes.html when '/notes' is accessed
-    app.get('/notes', (req, res) => {
-      res.sendFile(path.join(__dirname, '../public/index.html'));
+    router.get('/notes', (req, res) => {
+      res.sendFile(path.join(__dirname, '../public/notes.html'));
     });
 
-    app.get('*', function(req,res) {
+    router.get('/', function(req,res) {
       res.sendFile(path.join(__dirname, "../public/index.html"));
   });
       //Update json file whenever note is added or deleted
@@ -58,6 +51,5 @@ module.exports = app => {
           return true;
         });
       }
-    });
-  }
+
 
