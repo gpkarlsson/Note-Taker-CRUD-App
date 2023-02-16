@@ -20,7 +20,7 @@ module.exports = app => {
 
     // Set up post route for /api/notes
     app.post('/api/notes', (req, res) => {
-      
+
       let noteNew = req.body;
       notes.push(noteNew);
       updateDb();
@@ -29,6 +29,7 @@ module.exports = app => {
 
     //Retrieve note with specific id
     app.get('/api/notes/:id', (req, res) => {
+      // Display JSON for indices of notes array for provided id
       res.json(notes[req.params.id]);
     });
 
