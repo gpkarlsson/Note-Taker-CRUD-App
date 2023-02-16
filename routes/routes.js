@@ -1,6 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-const router = require('express').Router()
+const fs = require('fs');
+const path = require('path');
+const router = require('express').Router();
 
 //API ROUTES
 //------------------------------------
@@ -14,8 +14,8 @@ router.get('/api/notes', (req, res) => {
 // Set up post route for /api/notes
 router.post('/api/notes', (req, res) => {
   let noteNew = req.body
-  notes.push(noteNew)
-  updateDb()
+  notes.push(noteNew);
+  updateDb();
   return console.log('New Note Added' + noteNew.title)
 })
 
@@ -29,7 +29,7 @@ router.get('/api/notes/:id', (req, res) => {
 router.delete('/api/notes/:id', (req, res) => {
   notes.splice(req.params.id, 1)
   updateDb()
-  console.log('Deleted Note with id' + req.params.id)
+  console.log('Deleted Note with id: ' + req.params.id)
 })
 
 //VIEW ROUTES
