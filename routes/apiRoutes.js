@@ -3,7 +3,7 @@ const router = express.Router();
 //Generates random ID
 const uuid = require('uuid');
 //
-const db = require('db/databaseClass.js');
+const db = require('../db/databaseClass');
 
 
 router.get('/api/notes', async function (req, res) {
