@@ -6,7 +6,7 @@ const dataBase = require('./db/db.json');
 const app = express();
 const util = require('util');
 
-
+const routes = require('./routes/routes')
 //  Handling Async Processes
 const readFileAsync = util.promisify(fs.readFile);
 // util.promisify = function (writeFile) {
@@ -21,12 +21,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //static middleware
-app.use(express.static('./Develop/public'));
+app.use(express.static('./public'));
 
 //API Route "DELETE"
 app.delete('/api/notes/:id', (req, res) => {
   const idToDelete = parseInt(req.params.id);
-  readFileAsync('/Develop/db/db.json', 'utf-8').then(function(data) {
+  readFileAsync('db/db.json', 'utf-8').then(function(data) {
     const notes = [].concat(JSON.parse(data));
     const newNotesData = []
     for (let i = 0; i < notes.length; i++) {
@@ -36,14 +36,10 @@ app.delete('/api/notes/:id', (req, res) => {
     }
     return newNotesData
   }).then(function(notes) {
-    writeFileAsync('/Develop/db/db.json', JSON.stringify(notes))
+    writeFileAsync('db/db.json', JSON.stringify(notes))
     res.send('Saved Successfully');
   })
 })
-
-app.get('/api/notes', (req, res) => {
-  res.json(dataBase.slice(1));
-});
 
 
 
